@@ -1,0 +1,45 @@
+{
+  "sentiments": {
+    "positiu": 60,
+    "negatiu": 30,
+    "neutre": 10
+  },
+  "opinions": {
+    "positives": [
+      "Gran fitxatge que pot ajudar molt.",
+      "La majoria pensa que aportarà energia.",
+      "Ha tingut molt bon rendiment recentment."
+    ],
+    "negatives": [
+      "No encaixa amb l’estil de joc.",
+      "Massa car per al que ofereix.",
+      "No té experiència suficient."
+    ]
+  },
+  "comentaris": [
+    {
+      "text": "Gran fitxatge!",
+      "sentiment": "positiu",
+      "vots": 15,
+      "respostes": 3
+    },
+    {
+      "text": "Una mala decisió",
+      "sentiment": "negatiu",
+      "vots": 12,
+      "respostes": 2
+    },
+    {
+      "text": "Jugador molt complet",
+      "sentiment": "positiu",
+      "vots": 9,
+      "respostes": 1
+    },
+    {
+      "text": "No és el moment adequat",
+      "sentiment": "negatiu",
+      "vots": 7,
+      "respostes": 2
+    }
+  ]
+}

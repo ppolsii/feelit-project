@@ -1,0 +1,89 @@
+# 🧠 FeelIt - Anàlisi d'opinions a Reddit
+
+**FeelIt** és una aplicació web desenvolupada com a Treball de Final de Grau per analitzar opinions sobre qualsevol tema recollides des de Reddit, mostrant una visió resumida i clara mitjançant anàlisi de sentiments i comentaris destacats.
+
+---
+
+## 🔍 Funcionalitats
+
+- ✅ Cerca de temes desitjats
+- ✅ Extracció i visualització de comentaris rellevants
+- ✅ Classificació de sentiments (positiu, negatiu, neutre)
+- ✅ Barra de càrrega amb animació i icones
+- ✅ Pàgines informatives (`About`, `Contact`, `NotFound`)
+- ✅ Navegació amb StickyNavbar responsive
+- ✅ Scroll bloquejat només a la pàgina d'inici
+
+---
+
+## 🧱 Estructura del projecte
+
+```
+data/
+└── mockResults.json.jpg
+
+src/
+├── assets/                      # Imatges i recursos visuals
+│   ├── Fondo2.jpg
+│   ├── Fondo3.jpg
+│   ├── Fondo4.jpg
+│   ├── Fondo5.jpg
+│   └── Logo1.jpg
+
+├── components/                 # Components reutilitzables
+│   ├── layout/                 # Layout general i navbar
+│   │   ├── Layout.jsx
+│   │   ├── StickyNavbar.jsx
+│   │   ├── navbarUtils.js      # Funcions auxiliars de la navbar
+│   │   └── NavIcons.jsx        # Icones (Menu, Close)
+│   └── search/                 # Tot relacionat amb la cerca
+│       ├── SearchBar.jsx
+│       ├── SearchButton.jsx
+│       └── Resultats.jsx
+
+├── context/
+│   └── SearchContext.jsx       # Context per gestionar l'estat de cerca
+
+├── pages/                      # Rutes i pàgines de la web
+│   ├── Home.jsx
+│   ├── Search.jsx
+│   ├── About.jsx
+│   ├── Contact.jsx
+│   └── NotFound.jsx
+
+├── App.jsx                     # Rutes de React Router
+├── main.jsx                    # Entry point de React
+├── index.css                   # Estils globals + gestió d’scroll condicional
+└── index.html
+```
+
+---
+
+## 🧠 Tecnologies utilitzades
+
+- **React 18**
+- **React Router DOM** (gestió de rutes)
+- **Material Tailwind** (components estilitzats)
+- **Tailwind CSS**
+- **React Helmet** (SEO per pàgines)
+- **React Icons** (icones de càrrega)
+
+---
+
+## 📦 Instal·lació i execució
+
+```bash
+npm install
+npm run dev
+```
+
+Accedeix a `http://localhost:5173` per veure l’aplicació en funcionament.
+
+---
+
+## ✨ Desenvolupat per
+
+**Pol González Casals**  
+Universitat Autònoma de Barcelona (2025)  
+[LinkedIn](https://www.linkedin.com/in/pol-gonzalez-casals) · [GitHub](https://github.com/ppolsii)
+
