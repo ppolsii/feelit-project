@@ -1,7 +1,7 @@
 // src/pages/About.jsx
 import React from "react";
 import { Helmet } from "react-helmet";
-import fons from "../assets/Fondo2.jpg";
+import fons from "../Assets/Fondo2.jpg";
 
 export default function About() {
   return (
