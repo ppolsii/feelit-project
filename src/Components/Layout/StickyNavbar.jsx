@@ -18,7 +18,7 @@ import {
 } from "./navbarUtils";
 
 // Import icons for opening and closing the mobile menu
-import { MenuIcon, CloseIcon } from "./navIcons";
+import { MenuIcon, CloseIcon } from "./NavIcons";
 
 export function StickyNavbar() {
   const [openNav, setOpenNav] = useState(false); // Tracks if mobile menu is open
