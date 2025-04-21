@@ -20,6 +20,7 @@ export default function Search() {
   const [progress, setProgress] = useState(0); // Fake progress bar state
 
   const navigate = useNavigate();
+  const useMockData = true; // ← change to true when backend is available
 
   // When the user clicks the search button
   const handleSearch = () => {
@@ -37,10 +38,8 @@ export default function Search() {
     setProgress(0);
     setResults(null);
 
-    // Format the filename (optional for future use)
     const slug = initialTerm.toLowerCase().replace(/\s+/g, "_");
 
-    // Simulate loading progress
     const simulateProgress = setInterval(() => {
       setProgress((prev) => {
         const next = prev + 2;
@@ -48,15 +47,17 @@ export default function Search() {
       });
     }, 30);
 
-    // Delay before fetching the data
     const timeout = setTimeout(() => {
-      fetch(`/data/mockResults.json`) // 👉 Replace with `/data/${slug}.json` for dynamic file name
+      const url = useMockData
+        ? "/data/mockResults.json" // o `/data/${slug}.json` si fas servir noms dinàmics
+        : `/api/search?query=${encodeURIComponent(initialTerm)}`;
+
+      fetch(url)
         .then((res) => {
           if (!res.ok) throw new Error("File not found");
           return res.json();
         })
         .then((data) => {
-          // Check if the data is not empty
           const hasContent =
             data &&
             (
@@ -70,20 +71,19 @@ export default function Search() {
 
           if (!hasContent) throw new Error("Empty file");
 
-          setResults(data); // Save results to state
-          setProgress(100); // Complete progress
+          setResults(data);
+          setProgress(100);
         })
         .catch((err) => {
           console.error("Error loading data:", err);
-          setError(true); // Set error if data fetch fails
+          setError(true);
         })
         .finally(() => {
-          clearInterval(simulateProgress); // Stop progress simulation
-          setIsLoading(false); // End loading state
+          clearInterval(simulateProgress);
+          setIsLoading(false);
         });
-    }, 1500); // Delay for fake loading
+    }, 1500);
 
-    // Clean up on component unmount or when term changes
     return () => {
       clearInterval(simulateProgress);
       clearTimeout(timeout);

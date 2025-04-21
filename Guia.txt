@@ -1,0 +1,43 @@
+🛠️ GUIA RÀPIDA - Projecte FeelIt (React + Vite + Vercel)
+
+🔁 Quan faig una modificació al codi (VSCode)
+1. Desa els canvis (Ctrl + S)
+2. Obre el terminal i escriu:
+
+    git add .
+    git commit -m "Descripció del canvi"
+    git push origin main
+
+➡️ Això puja els canvis a GitHub i Vercel farà el desplegament automàticament.
+
+---
+
+💻 Per treballar en local (entorn de desenvolupament)
+
+    npm install     # Només la primera vegada o si hi ha noves dependències
+    npm run dev     # Obre el projecte en http://localhost:5173
+
+---
+
+🧪 Per veure com quedarà en producció
+
+    npm run build       # Genera la versió optimitzada a la carpeta /dist
+    npx serve dist      # Serveix la web de producció per comprovar-la
+
+---
+
+🚨 Quan he de fer `npm run build`?
+
+No és obligatori abans de fer `git push` perquè Vercel ho fa automàticament.
+Però és recomanable si:
+
+- Has afegit o canviat rutes de React Router (ex: /home, /search...)
+- Has modificat el fitxer vite.config.js
+- Vols assegurar-te que tot compila abans de pujar-ho
+- Vols simular com quedarà en producció amb `npx serve dist`
+
+---
+
+🌍 Web desplegada
+
+    https://feelit-zeta.vercel.app
