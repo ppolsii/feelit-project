@@ -45,7 +45,8 @@ export default function Contact() {
           Si tens dubtes, suggeriments o t’interessa aquest projecte, estaré encantat de parlar-ne!
         </p>
 
-        <div className="space-y-2 text-center">
+      
+        {/*<div className="space-y-2 text-center">
           {contactLinks.map((item, idx) => (
             <p key={idx}>
               {item.icon} <strong>{item.label}:</strong>{" "}
@@ -54,7 +55,7 @@ export default function Contact() {
               </a>
             </p>
           ))}
-        </div>
+        </div>*/}
 
         <p className="text-center text-sm text-gray-500">
           Si ets reclutador, estudiant, o simplement curiós, no dubtis en contactar.
