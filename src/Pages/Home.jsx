@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Allows navigation between pages
 import { Helmet } from "react-helmet"; // Sets the page title
 import SearchBar from "../Components/Search/SearchBar"; // Search bar component
-import fons from "../assets/Fondo2.jpg"; // Background image
+import fons from "../Assets/Fondo2.jpg"; // Background image
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState(""); // Search input state
