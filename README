@@ -20,7 +20,11 @@
 
 ```
 data/
-└── mockResults.json.jpg
+└── mockResults.json        # Fitxer JSON real per fetch
+
+public/
+└── data/
+    └── mockResults.json        # ✅ Fitxer JSON real per fetch
 
 src/
 ├── assets/                      # Imatges i recursos visuals
