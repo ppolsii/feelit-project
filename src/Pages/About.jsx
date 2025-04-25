@@ -6,7 +6,6 @@ import fons from "../Assets/Fondo2.jpg";
 export default function About() {
   return (
     <div className="min-h-screen bg-gray-100">
-    
       <Helmet>
         <title>Sobre el projecte - FeelIt</title>
       </Helmet>
@@ -16,54 +15,54 @@ export default function About() {
 
         {/* Introducció */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Per a què serveix?</h2>
+          <h2 className="text-2xl font-semibold">Finalitat del projecte</h2>
           <p className="text-lg leading-relaxed">
-            Aquest projecte forma part del meu Treball de Final de Grau en Enginyeria, i té com a objectiu oferir una eina web que permeti
-            <strong> entendre què pensa la gent a Internet sobre qualsevol tema</strong>: una destinació, una marca, una persona pública, un producte, etc.
+            <strong>FeelIt</strong> és una eina web desenvolupada en el marc del Treball de Final de Grau en Enginyeria, amb l'objectiu de
+            <strong> analitzar de manera estructurada les opinions expressades a Internet</strong> sobre qualsevol tema d'interès: destinacions, marques, figures públiques, productes, i més.
           </p>
           <p className="text-lg leading-relaxed">
-            A través d’una interfície senzilla, els usuaris poden fer una cerca i obtenir una
-            <strong> visió resumida de les opinions més destacades</strong> que s’han expressat a Reddit, una de les plataformes més actives i diverses de debat actual.
+            A través d’una interfície intuïtiva, els usuaris poden realitzar cerques específiques i obtenir una
+            <strong> síntesi visual i analítica de les opinions més representatives</strong> recollides de Reddit, una de les plataformes més dinàmiques i diverses d'opinió actual.
           </p>
         </section>
 
         {/* Funcionament */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Com funciona?</h2>
+          <h2 className="text-2xl font-semibold">Funcionament del sistema</h2>
           <p className="text-lg leading-relaxed">
-            Quan introdueixes un tema de cerca (com ara “viatjar a Malta” o “intel·ligència artificial”), el sistema accedeix automàticament a
-            <strong> Reddit</strong> i recull els comentaris més rellevants sobre aquest tema.
+            En introduir un terme de cerca (per exemple, "viatjar a Malta" o "intel·ligència artificial"), el sistema accedeix automàticament a
+            <strong> Reddit</strong> i recull els comentaris més rellevants associats.
           </p>
           <p className="text-lg leading-relaxed">
-            Aquests comentaris es processen per identificar-ne les opinions realment útils, es classifiquen segons el
-            <strong> sentiment</strong> (positiu, negatiu o neutre) i es resumeixen en un format visual i entenedor.
+            Posteriorment, els comentaris són processats per identificar aquells amb informació útil, classificar-los segons el seu
+            <strong> sentiment</strong> (positiu, negatiu o neutre) i generar un resum visual clar, facilitant així una interpretació ràpida de la percepció general de la comunitat.
           </p>
         </section>
 
         {/* Detalls tècnics */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Detalls tècnics</h2>
+          <h2 className="text-2xl font-semibold">Aspectes tècnics</h2>
           <p className="text-lg leading-relaxed">
-            El sistema utilitza la llibreria <code className="bg-gray-200 px-1 rounded">PRAW</code> per interactuar amb l’API de Reddit i obtenir fins a 100 comentaris per cerca.
-            Aquests comentaris passen per un model <strong>DistilBERT</strong> que filtra la informació no rellevant mitjançant
-            <strong> transfer learning</strong> amb dades prèviament etiquetades.
+            La plataforma utilitza <code className="bg-gray-200 px-1 rounded">PRAW</code> per interactuar amb l'API de Reddit i obtenir fins a 100 comentaris rellevants per cada cerca.
+            Aquests comentaris són analitzats mitjançant un model d'
+            <strong>intel·ligència artificial</strong> (<strong>DistilBERT</strong>), aplicant tècniques de <strong>transfer learning</strong> per filtrar la informació no pertinent.
           </p>
           <p className="text-lg leading-relaxed">
-            Per millorar l’anàlisi, també s’integra l’API de <strong>ChatGPT</strong>, que permet identificar sentiments i generar
-            <strong> resums textuals clars</strong>. Els resultats es mostren dins d’una aplicació web desenvolupada amb
-            <strong> React + TailwindCSS</strong>, pensada per a ser accessible i escalable.
+            Per optimitzar l'anàlisi de sentiments i millorar els resums generats, s'integra l'<strong>API de ChatGPT</strong>.
+            Tot el sistema està implementat amb <strong>React</strong> i <strong>TailwindCSS</strong> al frontend, assegurant una experiència fluida, escalable i accessible per a tot tipus d'usuaris.
           </p>
         </section>
 
         {/* Motivació */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Motivació</h2>
+          <h2 className="text-2xl font-semibold">Motivació i propòsit</h2>
           <p className="text-lg leading-relaxed">
-            En un moment on les xarxes socials són plenes d’opinions, però també de soroll i desinformació, aquest projecte busca oferir una eina clara per
-            <strong> veure el que pensa la comunitat de manera estructurada i útil</strong>.
+            En un entorn digital saturat d'informació, opinions i continguts sovint dispersos, <strong>FeelIt</strong> pretén ser una eina útil per
+            <strong> capturar i estructurar l’opinió col·lectiva de manera clara i fiable</strong>.
           </p>
           <p className="text-lg leading-relaxed">
-            El repte tècnic ha estat combinar la captació de dades, el processament lingüístic i la visualització intuïtiva, aprenent a integrar tecnologies diverses i a fer-les accessibles a qualsevol usuari.
+            El projecte representa també un repte tecnològic: integrar l'extracció de dades, el processament lingüístic i la visualització gràfica,
+            combinant diferents tecnologies avançades en un sol servei orientat a l'usuari.
           </p>
         </section>
 

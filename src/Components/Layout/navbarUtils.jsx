@@ -99,13 +99,16 @@ export function getAuthButtons(isAuthenticated, setIsAuthenticated, navigate) {
 
   // If user is not logged in
   return (
+    
     <>
+    {/*
       <Button variant="text" size="sm">
         <NavLink className="hover:text-blue-500">Log In</NavLink>
       </Button>
       <Button variant="gradient" size="sm">
         <NavLink className="text-white">Sign In</NavLink>
       </Button>
+    */}
     </>
   );
 }
