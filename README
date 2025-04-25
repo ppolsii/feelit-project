@@ -19,12 +19,9 @@
 ## 🧱 Estructura del projecte
 
 ```
-data/
-└── mockResults.json        # Fitxer JSON real per fetch
-
 public/
 └── data/
-    └── mockResults.json        # ✅ Fitxer JSON real per fetch
+    └── mockResults.json        # Fitxer JSON real per fetch
 
 src/
 ├── assets/                      # Imatges i recursos visuals

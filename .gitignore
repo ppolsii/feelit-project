@@ -30,3 +30,6 @@ yarn-error.log*
 
 #carpeta dist
 dist/
+
+#guia de uso
+Guia.txt
