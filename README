@@ -25,11 +25,8 @@ public/
 
 src/
 ├── assets/                      # Imatges i recursos visuals
-│   ├── Fondo2.jpg
-│   ├── Fondo3.jpg
-│   ├── Fondo4.jpg
-│   ├── Fondo5.jpg
-│   └── Logo1.jpg
+│   ├── Fondos.jpg
+│   └── Logos.jpg
 
 ├── components/                 # Components reutilitzables
 │   ├── layout/                 # Layout general i navbar
