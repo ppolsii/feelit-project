@@ -1,35 +1,35 @@
-# 🧠 FeelIt - Anàlisi d'opinions a Reddit
+# 🧠 FeelIt - Opinion Analysis on Reddit
 
-**FeelIt** és una aplicació web desenvolupada com a Treball de Final de Grau per analitzar opinions sobre qualsevol tema recollides des de Reddit, mostrant una visió resumida i clara mitjançant anàlisi de sentiments i comentaris destacats.
-
----
-
-## 🔍 Funcionalitats
-
-- ✅ Cerca de temes desitjats
-- ✅ Extracció i visualització de comentaris rellevants
-- ✅ Classificació de sentiments (positiu, negatiu, neutre)
-- ✅ Barra de càrrega amb animació i icones
-- ✅ Pàgines informatives (`About`, `Contact`, `NotFound`)
-- ✅ Navegació amb StickyNavbar responsive
-- ✅ Scroll bloquejat només a la pàgina d inici
+**FeelIt** is a web application developed as a Final Degree Project to analyze opinions on any topic collected from Reddit, presenting a summarized and clear view through sentiment analysis and highlighted comments.
 
 ---
 
-## 🧱 Estructura del projecte
+## 🔍 Features
+
+- ✅ Search for desired topics
+- ✅ Extraction and visualization of relevant comments
+- ✅ Sentiment classification (positiu, negatiu, neutre)
+- ✅ Loading bar with animation and icons
+- ✅ Informative pages (`About`, `Contact`, `NotFound`)
+- ✅ Responsive StickyNavbar navigation
+- ✅ Scroll locked only on the home page
+
+---
+
+## 🧱 Project Structure
 
 ```
 public/
 └── data/
-    └── mockResults.json        # Fitxer JSON real per fetch
+    └── mockResults.json        # Real JSON file for fetch
 
 src/
-├── assets/                      # Imatges i recursos visuals
+├── assets/                      # Images and visual resources
 │   ├── Fondos.jpg
 │   └── Logos.jpg
 
-├── components/                 # Components reutilitzables
-│   ├── layout/                 # Layout general i navbar
+├── components/                 # Reusable components
+│   ├── layout/                 # General layout and navbar
 │   │   ├── Layout.jsx
 │   │   ├── StickyNavbar.jsx
 │   │   ├── navbarUtils.js      # Funcions auxiliars de la navbar
@@ -57,7 +57,7 @@ src/
 
 ---
 
-## 🧠 Tecnologies utilitzades
+## 🧠 Used tecnologies
 
 - **React 18**
 - **React Router DOM** (gestió de rutes)
@@ -68,7 +68,7 @@ src/
 
 ---
 
-## 📦 Instal·lació i execució
+## 📦 Instalation and execution
 
 ```bash
 npm install
@@ -79,7 +79,7 @@ Accedeix a `http://localhost:5173` per veure l’aplicació en funcionament.
 
 ---
 
-## ✨ Desenvolupat per
+## ✨ Developed by
 
 **Pol González Casals**  
 Universitat Autònoma de Barcelona (2025)  
