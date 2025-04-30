@@ -74,8 +74,8 @@ src/
 npm install
 npm run dev
 ```
-
-Accedeix a `http://localhost:5173` per veure l’aplicació en funcionament.
+**Frintend  will now be accessible at:**
+`http://localhost:5173`
 
 ---
 
