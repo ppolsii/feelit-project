@@ -12,7 +12,7 @@
 - ✅ Barra de càrrega amb animació i icones
 - ✅ Pàgines informatives (`About`, `Contact`, `NotFound`)
 - ✅ Navegació amb StickyNavbar responsive
-- ✅ Scroll bloquejat només a la pàgina d'inici
+- ✅ Scroll bloquejat només a la pàgina d inici
 
 ---
 
@@ -40,7 +40,7 @@ src/
 │       └── Resultats.jsx
 
 ├── context/
-│   └── SearchContext.jsx       # Context per gestionar l'estat de cerca
+│   └── SearchContext.jsx       # Context per gestionar l estat de cerca
 
 ├── pages/                      # Rutes i pàgines de la web
 │   ├── Home.jsx
