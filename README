@@ -36,6 +36,7 @@ FeelIt-frontend/
 │    │   │   ├── StickyNavbar.jsx
 │    │   │   ├── navbarUtils.js      # Funcions auxiliars de la navbar
 │    │   │   └── NavIcons.jsx        # Icones (Menu, Close)
+│    │   │
 │    │   ├── Search/                 # Tot relacionat amb la cerca
 │    │   │   ├── Search.module.css
 │    │   │   ├── SearchBar.jsx
@@ -43,7 +44,7 @@ FeelIt-frontend/
 |    │   │   ├── LoadingScreen.jsx   # Pantalla de càrrega
 │    │   │   ├── SearchHeader.jsx
 │    │   │   └── Resultats.jsx
-
+|    │   │
 │    │   └── Visuals/
 │    │       ├── Visuals.module.css
 │    │       ├── CommentCard.jsx
@@ -65,7 +66,7 @@ FeelIt-frontend/
 │    │   └── NotFound.jsx
 │    │   
 │    ├── utils/  
-│    │   ├── api.jsx                 # Funcions per fer fetch a l API
+│    │   └── api.jsx                 # Funcions per fer fetch a l API
 │    │
 │    ├── App.jsx                     # Rutes de React Router
 │    ├── main.jsx                    # Entry point de React
