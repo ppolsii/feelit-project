@@ -7,28 +7,27 @@ import styles from "./Layout.module.css";
 import { useLocation } from "react-router-dom";
 
 // Returns the logo JSX element depending on the selected style
-export function getLogoVariant(style = 0) {
-  // Base style for the logo text (shared in multiple styles)
+export function getLogoVariant(style = 0, setLayoutMode = null) {
   const baseClass = styles.navbarUtilsLogoBase;
+
+  const handleClick = () => {
+    if (setLayoutMode) setLayoutMode("inici");
+  };
+
+  let logo;
 
   switch (style) {
     case 1:
-      // Style 1: "Feel" in dark gray, "It" in blue
-      return (
+      logo = (
         <Typography as={Link} to="/home" className={baseClass}>
           <span className={styles.navbarUtilsTextSecondary}>Feel</span>
           <span className={styles.navbarUtilsTextPrimary}>It</span>
         </Typography>
       );
-
+      break;
     case 2:
-      // Style 2: Larger bold logo with "It" italic and blue
-      return (
-        <Typography
-          as={Link}
-          to="/home"
-          className={styles.navbarUtilsLogoLarge}
-        >
+      logo = (
+        <Typography as={Link} to="/home" className={styles.navbarUtilsLogoLarge}>
           Feel
           <span
             className={`${styles.navbarUtilsTextPrimary} ${styles.navbarUtilsTextItalic}`}
@@ -37,17 +36,20 @@ export function getLogoVariant(style = 0) {
           </span>
         </Typography>
       );
-
+      break;
     default:
-      // Default style: "Feel" in blue, "It" in dark gray
-      return (
+      logo = (
         <Typography as={Link} to="/home" className={baseClass}>
           <span className={styles.navbarUtilsTextPrimary}>Feel</span>
           <span className={styles.navbarUtilsTextSecondary}>It</span>
         </Typography>
       );
   }
+
+  // Si cal controlar el layoutMode, embolcalla el logo
+  return setLayoutMode ? <div onClick={handleClick}>{logo}</div> : logo;
 }
+
 
 // Returns a list of navigation links for the navbar
 export function getNavList(setOpenNav) {
@@ -138,3 +140,5 @@ export function getAuthButtons(isAuthenticated, setIsAuthenticated, navigate) {
     </>
   );
 }
+
+

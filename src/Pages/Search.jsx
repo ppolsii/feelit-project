@@ -4,13 +4,12 @@ import { Helmet } from "react-helmet";
 import styles from "./Search.module.css";
 import { generateSearchCSV } from "../utils/api";
 
-// Components
 import SearchHeader from "../Components/Search/SearchHeader";
 import LoadingScreen from "../Components/Search/LoadingScreen";
 import Resultats from "../Components/Search/Resultats";
 
-// Global context
 import { useSearchContext } from "../Context/SearchContext";
+import { useLayoutContext } from "../Context/LayoutContext"; // 🆕
 
 export default function Search() {
   const [searchParams] = useSearchParams();
@@ -23,6 +22,8 @@ export default function Search() {
     lastSearchTerm,
     setLastSearchTerm,
   } = useSearchContext();
+
+  const { setLayoutMode } = useLayoutContext(); // 🆕
 
   const [searchTerm, setSearchTerm] = useState(initialTerm);
   const [results, setResults] = useState(null);
@@ -39,14 +40,17 @@ export default function Search() {
     }
   };
 
-  // Mostrar resultats guardats si tornem a /search sense paràmetres
+  // 🔁 Activa el mode 'search' en entrar a la pàgina
+  useEffect(() => {
+    setLayoutMode("search");
+  }, []);
+
   useEffect(() => {
     if (!initialTerm && lastSearchTerm && searchResults) {
       setResults(searchResults);
     }
   }, [initialTerm, lastSearchTerm, searchResults]);
 
-  // Carrega nova cerca o reutilitza si és el mateix terme
   useEffect(() => {
     if (!initialTerm.trim()) return;
 

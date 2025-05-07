@@ -6,26 +6,22 @@ import { Helmet } from "react-helmet";
 import SearchBar from "../Components/Search/SearchBar";
 import fons from "../Assets/Fondo2.jpg";
 import styles from "./Home.module.css";
+import { useLayoutContext } from "../Context/LayoutContext"; // 🆕
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState(""); // User input
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const { setLayoutMode } = useLayoutContext(); // 🆕
 
-  // Handle the search button click
   const handleSearch = () => {
     if (searchTerm.trim() !== "") {
-      // --------------------------------------------------------
-      // --------------------------------------------------------
-      // [FRONTEND NAVIGATION] Redirect to /search with the keyword
-      // --------------------------------------------------------
-      // --------------------------------------------------------
-      // The backend will be called from Search.jsx
       navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
     }
   };
 
-  // Disable scrolling when this page is active
+  // 🔁 Quan l’usuari entra a /home, fixem el layoutMode a 'inici'
   useEffect(() => {
+    setLayoutMode("inici");
     document.body.classList.add("home-no-scroll");
     return () => {
       document.body.classList.remove("home-no-scroll");
@@ -41,11 +37,8 @@ export default function Home() {
         <title>Explore opinions - FeelIt</title>
       </Helmet>
 
-      {/* Centered content */}
       <div className={styles.centerBox}>
         <h1 className={styles.mainTitle}>Opinion Analysis</h1>
-
-        {/* Search bar component with input handlers */}
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
