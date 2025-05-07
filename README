@@ -38,7 +38,7 @@ FeelIt-frontend/
 │    │   │   └── NavIcons.jsx        # Icones (Menu, Close)
 │    │   │
 │    │   ├── Search/                 # Tot relacionat amb la cerca
-│    │   │   ├── Search.module.css
+│    │   │   ├── SearchComponent.module.css
 │    │   │   ├── SearchBar.jsx
 │    │   │   ├── SearchButton.jsx
 |    │   │   ├── LoadingScreen.jsx   # Pantalla de càrrega

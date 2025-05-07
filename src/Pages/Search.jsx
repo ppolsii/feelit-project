@@ -32,7 +32,7 @@ export default function Search() {
   const navigate = useNavigate();
 
   // Use mock data or real backend
-  const useMockData = false;
+  const useMockData = true;
 
   // Triggered when the user submits a search
   const handleSearch = () => {
@@ -108,7 +108,7 @@ export default function Search() {
   }, [initialTerm]);
 
   return (
-    <div className={styles.searchPage}>
+    <div className={`${styles.searchPage} ${isLoading ? styles.centeredPage : ""}`}>
       {/* Set page title and meta info */}
       <Helmet>
         <title>Search Results - FeelIt</title>

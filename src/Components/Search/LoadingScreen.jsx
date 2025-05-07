@@ -15,7 +15,7 @@ export default function LoadingScreen({ progress }) {
   }, []);
 
   return (
-    <div className={styles.loadingWrapper}>
+    <div className={`${styles.loadingWrapper} ${styles.fullscreenCenter}`}>
       <div className={styles.loadingIcons}>
         <FaRobot className={styles.iconBounce} />
         <FaReddit className={styles.iconPulse} />
