@@ -1,74 +1,106 @@
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import styles from "./Search.module.css"; // Import custom styles for layout and components
+import React, { useEffect, useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import styles from "./Search.module.css";
+import { generateSearchCSV } from "../utils/api";
 
-function Search() {
-  // Get the current URL location
-  const location = useLocation();
+// Components
+import SearchHeader from "../Components/Search/SearchHeader";
+import LoadingScreen from "../Components/Search/LoadingScreen";
+import Resultats from "../Components/Search/Resultats";
 
-  // Extract the ?term= parameter from the URL
-  const params = new URLSearchParams(location.search);
-  const initialTerm = params.get("term") || "";
+export default function Search() {
+  // Get the search term from the URL (?term=...)
+  const [searchParams] = useSearchParams();
+  const initialTerm = searchParams.get("term") || "";
 
-  // State for loading, progress, result data and error handling
-  const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  // State to control the input field value
+  const [searchTerm, setSearchTerm] = useState(initialTerm);
+
+  // Store the results from the backend
   const [results, setResults] = useState(null);
+
+  // Control loading state
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Track progress percentage
+  const [progress, setProgress] = useState(0);
+
+  // Track if an error occurred (e.g. no results found)
   const [error, setError] = useState(false);
 
-  // Trigger data fetching every time the search term changes
+  const navigate = useNavigate();
+
+  // Use mock data or real backend
+  const useMockData = true;
+
+  // Triggered when the user submits a search
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      // Update the URL with the new term
+      navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+
+  // Run this every time the search term from the URL changes
   useEffect(() => {
-    // If the term is empty, do nothing
     if (!initialTerm.trim()) return;
 
-    // Start loading state and reset other UI elements
+    // Reset all states
     setIsLoading(true);
     setError(false);
     setProgress(0);
+    setResults(null);
 
-    // 🔵 STEP 1: Call the backend to generate a new CSV file based on the search term
-    fetch(`http://localhost:8000/api/search?keyword=${encodeURIComponent(initialTerm)}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Error generating CSV");
-        return res.json();
-      })
-      .then((data) => {
-        console.log("CSV generated successfully:", data.message);
-      })
-      .catch((err) => {
-        console.error("Error generating CSV:", err);
-      });
+    // Notify backend to start processing the search
+    generateSearchCSV(initialTerm)
+      .then((data) => console.log("Backend responded:", data.message))
+      .catch((err) => console.error("Backend error:", err));
 
-    // 🔵 STEP 2: While waiting, simulate loading with a progress bar and mock data
+    // Simulate loading progress (visual feedback)
     const simulateProgress = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + 2;
-        return next >= 90 ? 90 : next; // Stop at 90% until real data arrives
-      });
+      setProgress((prev) => Math.min(prev + 2, 90));
     }, 30);
 
-    // After a short delay, load mock data to simulate results
+    // Load the results (mock or real API)
     const timeout = setTimeout(() => {
-      fetch("/data/mockResults.json")
+      const url = useMockData
+        ? "/data/mockResults.json"
+        : `/api/search?query=${encodeURIComponent(initialTerm)}`;
+
+      fetch(url)
         .then((res) => {
-          if (!res.ok) throw new Error("Error loading mockResults");
+          if (!res.ok) throw new Error("Result not found");
           return res.json();
         })
         .then((data) => {
-          setProgress(100); // Complete the progress bar
-          setResults(data); // Store the results
+          // Check if the data has useful content
+          const hasContent =
+            data &&
+            (
+              (data.sentiments && Object.values(data.sentiments).some(n => n > 0)) ||
+              (data.opinions?.positives?.length > 0 || data.opinions?.negatives?.length > 0) ||
+              (data.comentaris?.length > 0)
+            );
+
+          if (!hasContent) throw new Error("Empty result");
+
+          // Save the results and finish progress
+          setResults(data);
+          setProgress(100);
         })
         .catch((err) => {
-          console.error("Error loading mock data:", err);
+          console.error("Error loading data:", err);
           setError(true);
         })
         .finally(() => {
+          // Cleanup loading
           clearInterval(simulateProgress);
-          setIsLoading(false); // Stop the loading state
+          setIsLoading(false);
         });
-    }, 1500); // Simulated backend response time
+    }, 1500);
 
-    // Clean up timers when component unmounts or term changes
+    // Clean up when component unmounts or term changes
     return () => {
       clearInterval(simulateProgress);
       clearTimeout(timeout);
@@ -77,35 +109,36 @@ function Search() {
 
   return (
     <div className={styles.searchPage}>
-      {/* Show progress bar and loading message */}
-      {isLoading && (
-        <div>
-          <p className={styles.searchLoadingText}>Buscant...</p>
-          <div className={styles.searchProgressBar}>
-            <div
-              className={styles.searchProgressFill}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-      )}
+      {/* Set page title and meta info */}
+      <Helmet>
+        <title>Search Results - FeelIt</title>
+        <meta name="description" content={`Opinions about ${initialTerm}`} />
+      </Helmet>
 
-      {/* Show error message if loading fails */}
-      {error && (
-        <div className={styles.searchError}>
-          Error carregant resultats.
-        </div>
-      )}
+      {/* Show loading screen while waiting */}
+      {isLoading ? (
+        <LoadingScreen progress={progress} />
+      ) : (
+        <div className={styles.searchContainer}>
+          {/* Header with search bar and title */}
+          <SearchHeader
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleSearch={handleSearch}
+            initialTerm={initialTerm}
+          />
 
-      {/* Show result content if available */}
-      {results && (
-        <div className={styles.searchResults}>
-          {/* Here you can render your result component */}
-          {/* Example: <Resultats results={results} /> */}
+          {/* Error message if no results found */}
+          {error ? (
+            <div className={styles.searchError}>
+              No results found for <strong>{initialTerm}</strong>.
+            </div>
+          ) : (
+            // Show result components
+            results && <Resultats results={results} />
+          )}
         </div>
       )}
     </div>
   );
 }
-
-export default Search;

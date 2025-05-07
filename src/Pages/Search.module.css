@@ -1,9 +1,11 @@
-/* ================================================
-   SEARCH PAGE CUSTOM STYLES
-   Used in: Search.jsx (new Tailwind-based version)
-   ================================================ */
+/* =======================================================
+   SEARCH PAGE STYLES
+   Used in: Search.jsx
+   ======================================================= */
 
-/* Wrapper for the entire page */
+/* ==========  PAGE STRUCTURE ========== */
+
+/* Full-screen container for the search page */
 .searchPage {
   display: flex;
   flex-direction: column;
@@ -13,41 +15,28 @@
   padding: 1.5rem;
 }
 
-/* Progress bar container */
-.searchProgressBar {
-  width: 16rem; /* 64 Tailwind units */
-  height: 1rem; /* 4 Tailwind units */
-  background-color: #d1d5db; /* Tailwind gray-300 */
-  border-radius: 9999px;
-  overflow: hidden;
-  margin-bottom: 1rem;
+/* Container for the main content (SearchBar, title, results) */
+.searchContainer {
+  max-width: 60rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* Fill of the progress bar */
-.searchProgressFill {
-  height: 100%;
-  background-color: #3b82f6; /* Tailwind blue-500 */
-  transition: width 0.3s ease;
-}
 
-/* Text shown during loading */
-.searchLoadingText {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-/* Error message */
+/* Error message shown if no results */
 .searchError {
-  color: #dc2626; /* Tailwind red-600 */
+  color: #dc2626; /* red-600 */
   font-weight: 600;
   font-size: 1.125rem;
   margin-top: 1rem;
   text-align: center;
 }
 
-/* Wrapper for result block */
+/* Wrapper for the result component */
 .searchResults {
   width: 100%;
   margin-top: 2rem;
 }
+

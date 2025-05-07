@@ -60,3 +60,107 @@
 .resultats > * + * {
   margin-top: 2.5rem; /* spacing between components */
 }
+
+
+/* ====================================================
+   LOADING SCREEN STYLES
+   Used in: Loading.jsx
+   ==================================================== */
+
+/* Container for the entire loading UI */
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Icons shown during loading */
+.loadingIcons {
+  display: flex;
+  gap: 2rem;
+  font-size: 3rem;
+  color: #6b7280; /* gray-500 */
+}
+
+/* Animation for robot icon */
+.iconBounce {
+  animation: bounce 1s infinite;
+}
+
+/* Animation for reddit icon */
+.iconPulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* "Loading..." text */
+.loadingText {
+  font-size: 1rem;
+  color: #4b5563; /* gray-600 */
+}
+
+
+/* ==========  PROGRESS BAR ========== */
+
+/* Container for the progress bar */
+.progressBar {
+  width: 100%;
+  max-width: 30rem;
+  height: 0.5rem;
+  background-color: #e5e7eb; /* gray-200 */
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* Filled portion of the progress bar */
+.progressFill {
+  height: 100%;
+  background-color: #2563eb; /* blue-600 */
+  transition: width 0.3s ease;
+}
+
+
+/* ==========  ANIMATIONS ========== */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+/* ====================================================
+   SEARCH HEADER STYLES
+   Used in: SearchHeader.jsx
+   ==================================================== */
+/* Wrapper for the search bar (same width as homepage) */
+.searchBarWrapper {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Page title displayed above results */
+.searchTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937; /* gray-800 */
+}
+
+/* Highlighted keyword in title */
+.searchTerm {
+  color: #2563eb; /* blue-600 */
+}
