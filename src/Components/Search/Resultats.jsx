@@ -3,7 +3,7 @@
 import React from "react";
 import SentimentChart from "../Visuals/SentimentChat"; // Component to show a chart
 import OpinionsList from "../Visuals/OpinionsList"; // Component to show summaries and comments
-import styles from "./Search.module.css"; // Import CSS module for styling
+import styles from "./SearchComponent.module.css"; // Import CSS module for styling
 
 export default function Resultats({ results }) {
   // Get the data from the JSON: sentiments, opinions, and individual comments

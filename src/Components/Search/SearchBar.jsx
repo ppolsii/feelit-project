@@ -2,7 +2,7 @@
 
 import React from "react";
 import SearchButton from "./SearchButton";
-import styles from "./Search.module.css";
+import styles from "./SearchComponent.module.css";
 
 
 // Get three props: searchTerm (value of the text field), setSearchTerm (function to update it), 

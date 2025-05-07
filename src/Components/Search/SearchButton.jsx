@@ -1,7 +1,7 @@
 // SearchButton.jsx - Button used in the search bar
 
 import React from "react";
-import styles from "./Search.module.css"; // Import CSS module for styling
+import styles from "./SearchComponent.module.css"; // Import CSS module for styling
 
 // This button triggers the search when clicked
 export default function SearchButton({ onClick }) {

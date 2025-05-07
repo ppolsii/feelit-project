@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { FaRobot, FaReddit } from "react-icons/fa";
-import styles from "./Search.module.css"; // Adjust the path as necessary
+import styles from "./SearchComponent.module.css"; // Adjust the path as necessary
 
 export default function LoadingScreen({ progress }) {
   const [dots, setDots] = useState(0);

@@ -32,7 +32,7 @@ export default function Search() {
   const navigate = useNavigate();
 
   // Use mock data or real backend
-  const useMockData = true;
+  const useMockData = false;
 
   // Triggered when the user submits a search
   const handleSearch = () => {

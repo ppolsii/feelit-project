@@ -2,7 +2,7 @@
 
 import React from "react";
 import SearchBar from "./SearchBar";
-import styles from "./Search.module.css"; // Adjust the path as necessary
+import styles from "./SearchComponent.module.css"; // Adjust the path as necessary
 
 export default function SearchHeader({ searchTerm, setSearchTerm, handleSearch, initialTerm }) {
   return (
