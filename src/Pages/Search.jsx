@@ -9,60 +9,66 @@ import SearchHeader from "../Components/Search/SearchHeader";
 import LoadingScreen from "../Components/Search/LoadingScreen";
 import Resultats from "../Components/Search/Resultats";
 
+// Global context
+import { useSearchContext } from "../Context/SearchContext";
+
 export default function Search() {
-  // Get the search term from the URL (?term=...)
   const [searchParams] = useSearchParams();
   const initialTerm = searchParams.get("term") || "";
 
-  // State to control the input field value
+  const {
+    setHasSearched,
+    searchResults,
+    setSearchResults,
+    lastSearchTerm,
+    setLastSearchTerm,
+  } = useSearchContext();
+
   const [searchTerm, setSearchTerm] = useState(initialTerm);
-
-  // Store the results from the backend
   const [results, setResults] = useState(null);
-
-  // Control loading state
   const [isLoading, setIsLoading] = useState(false);
-
-  // Track progress percentage
   const [progress, setProgress] = useState(0);
-
-  // Track if an error occurred (e.g. no results found)
   const [error, setError] = useState(false);
-
   const navigate = useNavigate();
 
-  // Use mock data or real backend
   const useMockData = true;
 
-  // Triggered when the user submits a search
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      // Update the URL with the new term
       navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
     }
   };
 
-  // Run this every time the search term from the URL changes
+  // Mostrar resultats guardats si tornem a /search sense paràmetres
+  useEffect(() => {
+    if (!initialTerm && lastSearchTerm && searchResults) {
+      setResults(searchResults);
+    }
+  }, [initialTerm, lastSearchTerm, searchResults]);
+
+  // Carrega nova cerca o reutilitza si és el mateix terme
   useEffect(() => {
     if (!initialTerm.trim()) return;
 
-    // Reset all states
+    if (searchResults && initialTerm === lastSearchTerm) {
+      setResults(searchResults);
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     setError(false);
     setProgress(0);
     setResults(null);
 
-    // Notify backend to start processing the search
     generateSearchCSV(initialTerm)
       .then((data) => console.log("Backend responded:", data.message))
       .catch((err) => console.error("Backend error:", err));
 
-    // Simulate loading progress (visual feedback)
     const simulateProgress = setInterval(() => {
       setProgress((prev) => Math.min(prev + 2, 90));
     }, 30);
 
-    // Load the results (mock or real API)
     const timeout = setTimeout(() => {
       const url = useMockData
         ? "/data/mockResults.json"
@@ -74,7 +80,6 @@ export default function Search() {
           return res.json();
         })
         .then((data) => {
-          // Check if the data has useful content
           const hasContent =
             data &&
             (
@@ -85,22 +90,22 @@ export default function Search() {
 
           if (!hasContent) throw new Error("Empty result");
 
-          // Save the results and finish progress
           setResults(data);
+          setSearchResults(data);
+          setLastSearchTerm(initialTerm);
           setProgress(100);
+          setHasSearched(true);
         })
         .catch((err) => {
           console.error("Error loading data:", err);
           setError(true);
         })
         .finally(() => {
-          // Cleanup loading
           clearInterval(simulateProgress);
           setIsLoading(false);
         });
     }, 1500);
 
-    // Clean up when component unmounts or term changes
     return () => {
       clearInterval(simulateProgress);
       clearTimeout(timeout);
@@ -109,32 +114,27 @@ export default function Search() {
 
   return (
     <div className={`${styles.searchPage} ${isLoading ? styles.centeredPage : ""}`}>
-      {/* Set page title and meta info */}
       <Helmet>
         <title>Search Results - FeelIt</title>
         <meta name="description" content={`Opinions about ${initialTerm}`} />
       </Helmet>
 
-      {/* Show loading screen while waiting */}
       {isLoading ? (
         <LoadingScreen progress={progress} />
       ) : (
         <div className={styles.searchContainer}>
-          {/* Header with search bar and title */}
           <SearchHeader
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             handleSearch={handleSearch}
-            initialTerm={initialTerm}
+            initialTerm={initialTerm || lastSearchTerm}
           />
 
-          {/* Error message if no results found */}
           {error ? (
             <div className={styles.searchError}>
               No results found for <strong>{initialTerm}</strong>.
             </div>
           ) : (
-            // Show result components
             results && <Resultats results={results} />
           )}
         </div>

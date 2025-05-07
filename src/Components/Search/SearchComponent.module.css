@@ -101,18 +101,13 @@
 
 /* Centra verticalment i horitzontalment la pantalla de càrrega */
 .fullscreenCenter {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white; /* o el color de fons de la teva web */
-  z-index: 50; /* Assegura que estigui a sobre de tot */
 }
+
 
 
 /* ==========  PROGRESS BAR ========== */

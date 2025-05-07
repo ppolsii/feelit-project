@@ -2,6 +2,10 @@
 
 import React from "react";
 import { Navbar } from "@material-tailwind/react"; // UI component for the navbar background
+import { NavLink, useLocation } from "react-router-dom";
+import { Typography } from "@material-tailwind/react";
+import { useSearchContext } from "../../Context/SearchContext";
+
 
 // Import helper functions to build the logo and navigation links
 import { getLogoVariant, getNavList } from "./navbarUtils";
@@ -15,7 +19,40 @@ export default function StickyNavbar() {
   const logo = getLogoVariant(0);
 
   // Get the list of navigation links (Home, About, Contact)
-  const navList = getNavList(() => {}); // No need for mobile close handler
+  const { hasSearched, setHasSearched } = useSearchContext();
+  const location = useLocation();
+
+  const isSearchActive = location.pathname === "/search";
+
+  const navItems = [
+    { label: isSearchActive ? "Search" : "Inici", to: isSearchActive ? "/search" : "/home" },
+    { label: "About", to: "/about" },
+    { label: "Contacte", to: "/contact" },
+  ];
+
+  const navList = (
+    <ul className={styles.navbarUtilsNavList}>
+      {navItems.map((item) => (
+        <Typography
+          as="li"
+          key={item.to}
+          className={`${styles.navbarUtilsNavItem} ${styles.navbarUtilsTextBlueGray}`}
+        >
+          <NavLink
+            to={item.to}
+            className={({ isActive }) =>
+              `${styles.navbarUtilsNavLink} ${styles.navbarUtilsNavLarge} ${
+                isActive ? styles.navbarUtilsNavLinkActive : ""
+              }`
+            }
+            onClick={() => {}}
+          >
+            {item.label}
+          </NavLink>
+        </Typography>
+      ))}
+    </ul>
+  );
 
   return (
     // Main Navbar container (full width and sticky)

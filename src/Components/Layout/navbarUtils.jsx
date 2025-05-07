@@ -4,6 +4,7 @@ import React from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { NavLink, Link } from "react-router-dom";
 import styles from "./Layout.module.css";
+import { useLocation } from "react-router-dom";
 
 // Returns the logo JSX element depending on the selected style
 export function getLogoVariant(style = 0) {
@@ -51,8 +52,12 @@ export function getLogoVariant(style = 0) {
 // Returns a list of navigation links for the navbar
 export function getNavList(setOpenNav) {
   // Define the list of navigation items with label and destination route
+  const location = useLocation();
+
+  const isSearch = location.pathname.startsWith("/search");
+
   const navItems = [
-    { label: "Inici", to: "/home" },
+    { label: isSearch ? "Search" : "Inici", to: isSearch ? "/search" : "/home" },
     { label: "About", to: "/about" },
     { label: "Contacte", to: "/contact" },
   ];
