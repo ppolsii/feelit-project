@@ -1,26 +1,34 @@
-// NotFound.jsx - This page appears when a user visits a route that doesn't exist
+// NotFound.jsx - Page shown when route is not found
 
 import React from "react";
-import { Link } from "react-router-dom"; // Allows navigation to another route
+import { Link } from "react-router-dom"; // For navigation
+import SearchBar from "../Components/Search/SearchBar"; // Optional: reuse SearchBar
+import styles from "./Search.module.css"; // Reuse CSS already defined
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center p-6 bg-gray-100">
-      {/* Big red "404" to show the error */}
-      <h1 className="text-5xl font-bold text-red-600 mb-4">404</h1>
+    <div className={styles.searchPage}>
+      <div className={styles.searchContainer}>
+        {/* Title */}
+        <h1 className={styles.searchTitle}>404 - Page not found</h1>
 
-      {/* Message saying the page was not found */}
-      <p className="text-xl text-gray-700 mb-6">
-        Ups! Aquesta pàgina no existeix.
-      </p>
+        {/* Subtitle */}
+        <p className={styles.searchError}>
+          Oops! The page you're looking for doesn't exist.
+        </p>
 
-      {/* Link to return to the home page */}
-      <Link
-        to="/home"
-        className="text-blue-600 hover:underline text-lg"
-      >
-        ⬅️ Tornar a l’inici
-      </Link>
+        {/* SearchBar centered with fixed width */}
+        <div className={styles.searchBarWrapper}>
+          <SearchBar />
+        </div>
+
+        {/* Link to return to homepage */}
+        <div style={{ textAlign: "center" }}>
+          <Link to="/home" className={styles.searchTerm}>
+            ← Go back to Home
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

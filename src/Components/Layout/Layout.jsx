@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Outlet } from "react-router-dom"; // Used to render the current page inside the layout
-import { StickyNavbar } from "./StickyNavbar"; // Top navigation bar component
+import StickyNavbar from "./StickyNavbar"; // Top navigation bar component
 
 export default function Layout() {
   return (

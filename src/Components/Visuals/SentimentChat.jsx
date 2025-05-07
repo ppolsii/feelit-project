@@ -1,30 +1,27 @@
-// SentimentChart.jsx - Shows a pie or bar chart with sentiment distribution
+// SentimentChart.jsx – Displays a sentiment distribution chart (pie or bar)
 
 import React, { useState } from "react";
 import {
-  PieChart,
-  Pie,
-  Cell,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts"; // Chart components
-import { Switch } from "@headlessui/react"; // UI toggle (not used in this file)
+  PieChart, Pie, Cell,
+  BarChart, Bar,
+  XAxis, YAxis,
+  Tooltip, ResponsiveContainer, Legend,
+} from "recharts";
 
+import styles from "./Visuals.module.css"; // Import styles for layout and toggles
+
+// Define chart colors for each sentiment category
 const COLORS = {
-  positiu: "#22c55e",  // Green
-  negatiu: "#ef4444",  // Red
-  neutre: "#9ca3af",   // Gray
+  positiu: "#22c55e", // green
+  negatiu: "#ef4444", // red
+  neutre: "#9ca3af",  // gray
 };
 
 export default function SentimentChart({ sentiments }) {
-  const [showPieChart, setShowPieChart] = useState(true); // Controls chart type
+  // Toggle state for chart view (pie or bar)
+  const [showPieChart, setShowPieChart] = useState(true);
 
-  // Prepare the data to be shown in the charts
+  // Transform sentiment counts into data format for charts
   const chartData = [
     { name: "Positius", value: sentiments.positiu, color: COLORS.positiu },
     { name: "Negatius", value: sentiments.negatiu, color: COLORS.negatiu },
@@ -32,45 +29,34 @@ export default function SentimentChart({ sentiments }) {
   ];
 
   return (
-    <div className="w-full max-w-xl mx-auto">
-      {/* Header with chart type toggle */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold text-blue-gray-800">
-          Distribució de sentiments
-        </h2>
+    <div className={styles.chartWrapper}>
+      {/* Top section: title and chart toggle */}
+      <div className={styles.chartHeader}>
+        <h2 className={styles.chartTitle}>{/* Sentiment distribution   */}</h2>
 
-        {/* Toggle buttons to switch chart type */}
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-medium text-gray-700">Gràfic:</span>
-
-          <div className="relative inline-flex items-center bg-gray-200 rounded-full w-28 h-9 p-1">
-            {/* Bar chart button */}
+        {/* Toggle buttons to switch between chart types */}
+        <div className={styles.chartToggle}>
+          <span className={styles.chartToggleLabel}>Chart:</span>
+          <div className={styles.chartToggleGroup}>
             <button
               onClick={() => setShowPieChart(false)}
-              className={`w-1/2 text-sm rounded-full transition-all duration-300 
-                ${!showPieChart ? "bg-blue-600 text-white shadow" : "text-gray-600"}
-              `}
+              className={`${styles.chartToggleButton} ${!showPieChart ? styles.chartToggleActive : ""}`}
             >
-              Barres
+              Bars
             </button>
-
-            {/* Pie chart button */}
             <button
               onClick={() => setShowPieChart(true)}
-              className={`w-1/2 text-sm rounded-full transition-all duration-300 
-                ${showPieChart ? "bg-blue-600 text-white shadow" : "text-gray-600"}
-              `}
+              className={`${styles.chartToggleButton} ${showPieChart ? styles.chartToggleActive : ""}`}
             >
-              Pastís
+              Pie
             </button>
           </div>
         </div>
       </div>
 
-      {/* Chart container */}
+      {/* Main chart display (either Pie or Bar) */}
       <ResponsiveContainer width="100%" height={300}>
         {showPieChart ? (
-          // Pie chart view
           <PieChart>
             <Pie
               data={chartData}
@@ -79,25 +65,19 @@ export default function SentimentChart({ sentiments }) {
               cx="50%"
               cy="50%"
               outerRadius={100}
-              labelLine={false} // Hide label lines
+              labelLine={false}
             >
-              {/* Color each pie slice */}
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip /> {/* Show values on hover */}
-            <Legend /> {/* Show legend with labels */}
+            <Tooltip />
+            <Legend />
           </PieChart>
         ) : (
-          // Bar chart view
           <BarChart data={chartData} layout="vertical">
-            <XAxis type="number" hide domain={[0, "dataMax + 10"]} /> {/* Hide x-axis */}
-            <YAxis
-              type="category"
-              dataKey="name"
-              width={80} // Avoid text being cut off
-            />
+            <XAxis type="number" hide domain={[0, "dataMax + 10"]} />
+            <YAxis type="category" dataKey="name" width={80} />
             <Tooltip />
             <Legend />
             <Bar dataKey="value">

@@ -3,6 +3,7 @@
 import React from "react";
 import SentimentChart from "../Visuals/SentimentChat"; // Component to show a chart
 import OpinionsList from "../Visuals/OpinionsList"; // Component to show summaries and comments
+import styles from "./Search.module.css"; // Import CSS module for styling
 
 export default function Resultats({ results }) {
   // Get the data from the JSON: sentiments, opinions, and individual comments
@@ -15,7 +16,7 @@ export default function Resultats({ results }) {
   const comentarisNegatius = comentaris.filter(c => c.sentiment === "negatiu");
 
   return (
-    <div className="space-y-10">
+    <div className={styles.resultats}>
       {/* Show sentiment distribution in a chart */}
       <SentimentChart sentiments={sentiments} />
 

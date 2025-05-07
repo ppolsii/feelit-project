@@ -1,30 +1,34 @@
-// SearchBar.jsx - Input field and button to enter a search term
+// SearchBar.jsx - Component that show a search bar with a text input and a button
 
 import React from "react";
-import SearchButton from "./SearchButton"; // Import the search button component
+import SearchButton from "./SearchButton";
+import styles from "./Search.module.css";
 
+
+// Get three props: searchTerm (value of the text field), setSearchTerm (function to update it), 
+// and handleSearch (function that is executed when the user wants to search)
 export default function SearchBar({ searchTerm, setSearchTerm, handleSearch }) {
-  // When user submits the form (press Enter or clicks button)
+  
+  // Function that is executed when the form is submitted (e.g., user presses Enter)
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
-    handleSearch(); // Run the search function
+    e.preventDefault();   // Page is not reloaded when the form is submitted
+    handleSearch();       // Shouts the function to perform the search
   };
 
   return (
-    <form
-      onSubmit={handleSubmit} // Run when the form is submitted
-      className="flex w-full items-center gap-2"
-    >
-      {/* Input box where user types the topic */}
+    // Form that contains the text input and the button - When submitted (Enter or click), handleSubmit is executed
+    <form onSubmit={handleSubmit} className={styles.searcBarhForm}>
+      
+      {/* Input de text on l'usuari escriu el terme de cerca */}
       <input
-        type="text"
-        className="flex-1 rounded border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-        placeholder="Cerca un tema..." // Placeholder text
-        value={searchTerm} // Controlled input value
-        onChange={(e) => setSearchTerm(e.target.value)} // Update the input value
+        type="text"                          
+        className={styles.searchBarInput}    
+        placeholder="Cerca un tema..."      
+        value={searchTerm}                  // Value currently in the input (controlled component)
+        onChange={(e) => setSearchTerm(e.target.value)}  // Each time the input changes, update the state with the new value
       />
 
-      {/* Button to start the search */}
+      {/*Search button. Does the same thing as the submit: calls handleSearch */}
       <SearchButton onClick={handleSearch} />
     </form>
   );

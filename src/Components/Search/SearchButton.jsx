@@ -1,6 +1,7 @@
 // SearchButton.jsx - Button used in the search bar
 
 import React from "react";
+import styles from "./Search.module.css"; // Import CSS module for styling
 
 // This button triggers the search when clicked
 export default function SearchButton({ onClick }) {
@@ -8,9 +9,9 @@ export default function SearchButton({ onClick }) {
     <button
       type="submit" // Button will submit the form it's inside
       onClick={onClick} // Run the provided onClick function
-      className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 transition-colors"
+      className={styles.searchButton} 
     >
-      Cercar {/* Button text */}
+      Cercar
     </button>
   );
 }

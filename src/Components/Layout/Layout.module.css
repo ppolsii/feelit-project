@@ -1,0 +1,176 @@
+/* =======================================
+   NAVBAR UTILS - Used in navbarUtils.jsx
+   Includes styles for:
+   - Navigation links
+   - Auth buttons
+   ======================================= */
+
+/* Base style for logo text */
+.navbarUtilsLogoBase {
+  cursor: pointer;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Larger logo style */
+.navbarUtilsLogoLarge {
+  font-weight: 800;
+  font-size: 1.875rem;
+  letter-spacing: -0.015em;
+  color: #0f172a;
+}
+
+/* Primary color text */
+.navbarUtilsTextPrimary {
+  color: #2563eb;
+}
+
+/* Secondary color text */
+.navbarUtilsTextSecondary {
+  color: #0f172a;
+}
+
+/* Italic style text */
+.navbarUtilsTextItalic {
+  font-style: italic;
+}
+
+
+/* =======================================
+   NAVIGATION LINKS
+   ======================================= */
+
+/* Container for navigation links */
+.navbarUtilsNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Horizontal layout on medium screens and larger */
+@media (min-width: 768px) {
+  .navbarUtilsNavList {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+/* Individual navigation item */
+.navbarUtilsNavItem {
+  padding: 0.25rem;
+  font-weight: 400;
+}
+
+/* Text color used in navigation items */
+.navbarUtilsTextBlueGray {
+  color: #334155;
+}
+
+/* Link wrapper */
+.navbarUtilsNavLink {
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+  color: #334155;
+}
+
+/* Navigation link text style */
+.navbarUtilsNavLarge {
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Hover color for navigation links */
+.navbarUtilsNavLink:hover,
+.navbarUtilsNavLinkHover:hover {
+  color: #3b82f6;
+}
+
+/* Active link color */
+.navbarUtilsNavLinkActive {
+  color: #2563eb;
+}
+
+
+/* =======================================
+   AUTH BUTTONS
+   ======================================= */
+
+/* Hover transition for buttons or links */
+.navbarUtilsNavLinkHover {
+  transition: color 0.2s ease;
+}
+
+
+/* =======================================
+   ICONS
+   ======================================= */
+
+/* Shared icon size (e.g. menu toggle) */
+.navbarUtilsIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+
+/* =======================================
+   STICKY NAVBAR - Used in StickyNavbar.jsx
+   Includes layout for left, center and right sections
+   ======================================= */
+
+/* Navbar container that sticks to the top */
+.stickyNavbarContainer {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-radius: 0;
+  padding: 1rem;
+}
+
+/* Larger padding on wider screens */
+@media (min-width: 768px) {
+  .stickyNavbarContainer {
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* Wrapper for all navbar content */
+.stickyNavbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Left section of navbar */
+.stickyNavbarLeft {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* Center section of navbar */
+.stickyNavbarCenter {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Right section of navbar */
+.stickyNavbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}

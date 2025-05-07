@@ -1,0 +1,62 @@
+/* ====================================================
+   SEARCH BAR STYLES
+   Includes styles for: search form container, input field, and button
+   Used in: SearchBar.jsx
+   ==================================================== */
+
+/* Wrapper <form> that contains the input and button */
+.searcBarhForm {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem; /* gap between input and button */
+}
+
+/* Text input for entering the search term */
+.searchBarInput {
+  flex: 1;
+  border-radius: 0.375rem; /* rounded corners */
+  border: 1px solid #d1d5db; /* light gray border */
+  padding: 0.5rem 1rem; /* padding on x and y */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* subtle shadow */
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Input style when focused */
+.searchBarInput:focus {
+  border-color: #3b82f6; /* blue border on focus */
+  box-shadow: 0 0 0 1px #3b82f6; /* subtle blue ring */
+}
+
+/* ====================================================
+   SEARCH BUTTON STYLES
+   Used in: SearchButton.jsx
+   ==================================================== */
+
+/* Search button styling */
+.searchButton {
+  border-radius: 0.375rem; /* rounded corners */
+  background-color: #3b82f6; /* blue background */
+  padding: 0.5rem 1rem; /* inner spacing */
+  color: white; /* white text */
+  transition: background-color 0.2s ease; /* smooth hover effect */
+  border: none;
+  cursor: pointer;
+}
+
+/* Button hover effect */
+.searchButton:hover {
+  background-color: #2563eb; /* darker blue on hover */
+}
+
+
+/* ====================================================
+   RESULT SECTION SPACING
+   Adds vertical spacing between chart and opinion list
+   Used in: Resultats.jsx
+   ==================================================== */
+
+.resultats > * + * {
+  margin-top: 2.5rem; /* spacing between components */
+}

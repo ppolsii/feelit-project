@@ -1,77 +1,44 @@
-// StickyNavbar.jsx - This is the top navigation bar shown on all pages
+// StickyNavbar.jsx - Top navigation bar shown on all pages
 
-import React, { useState, useEffect } from "react";
-import {
-  Navbar,
-  Collapse,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-tailwind/react"; // Tailwind UI components
-import { NavLink, useNavigate, Link } from "react-router-dom"; // Routing helpers
+import React from "react";
+import { Navbar } from "@material-tailwind/react"; // UI component for the navbar background
 
-// Import helper functions to generate navbar content
-import {
-  getLogoVariant,
-  getNavList,
-  getAuthButtons,
-} from "./navbarUtils";
+// Import helper functions to build the logo and navigation links
+import { getLogoVariant, getNavList } from "./navbarUtils";
 
-// Import icons for opening and closing the mobile menu
-import { MenuIcon, CloseIcon } from "./NavIcons";
+// Import styles from CSS module
+import styles from "./Layout.module.css";
 
-export function StickyNavbar() {
-  const [openNav, setOpenNav] = useState(false); // Tracks if mobile menu is open
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Auth state (mock)
-  const navigate = useNavigate();
+// Main StickyNavbar component (clean version without login/logout)
+export default function StickyNavbar() {
+  // Get the logo component
+  const logo = getLogoVariant(0);
 
-  // 🖥️ Auto-close the mobile menu when the window gets wide (>=768px)
-  useEffect(() => {
-    const handler = () => window.innerWidth >= 768 && setOpenNav(false);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-
-  // Get dynamic elements from helper functions
-  const logo = getLogoVariant(0); // Default logo style
-  const navList = getNavList(setOpenNav); // Links for "Inici", "About", "Contacte"
-  const authButtons = getAuthButtons(isAuthenticated, setIsAuthenticated, navigate); // Log in/out buttons
+  // Get the list of navigation links (Home, About, Contact)
+  const navList = getNavList(() => {}); // No need for mobile close handler
 
   return (
-    <Navbar
-      fullWidth
-      className="sticky top-0 z-10 rounded-none px-4 py-4 md:px-8 md:py-6"
-    >
-      <div className="container mx-auto flex items-center justify-between relative">
-        {/* Left: Logo */}
-        {logo}
+    // Main Navbar container (full width and sticky)
+    <Navbar fullWidth className={styles.stickyNavbarContainer}>
+      {/* Inner wrapper: arranges logo and nav links in one row */}
+      <div className={styles.stickyNavbarInner}>
 
-        {/* Center: Menu links (desktop only) */}
-        <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        {/* Left side: the logo */}
+        <div className={styles.stickyNavbarLeft}>
+          {logo}
+        </div>
+
+        {/* Center: navigation links */}
+        <div className={styles.stickyNavbarCenter}>
           {navList}
         </div>
 
-        {/* Right: Auth buttons + menu icon (only shows on mobile) */}
-        <div className="flex items-center gap-x-2 md:ml-auto">
-          <div className="hidden md:flex">{authButtons}</div>
-          <IconButton
-            variant="text"
-            aria-label={openNav ? "Tancar menú" : "Obrir menú"}
-            className="h-6 w-6 text-inherit md:hidden"
-            onClick={() => setOpenNav(!openNav)} // Toggle mobile menu
-          >
-            {openNav ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
+        {/* Right side: reserved for future login/logout buttons */}
+        <div className={styles.stickyNavbarRight}>
+          {/* Reservat per a futurs botons de login/logout */}
         </div>
+
       </div>
-
-      {/* Mobile menu collapsible content */}
-      <Collapse open={openNav} className="md:hidden mt-2">
-        <div className="flex flex-col gap-4">
-          {navList}
-          {authButtons}
-        </div>
-      </Collapse>
     </Navbar>
   );
 }
