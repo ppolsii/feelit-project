@@ -7,47 +7,23 @@ import styles from "./Layout.module.css";
 import { useLocation } from "react-router-dom";
 
 // Returns the logo JSX element depending on the selected style
-export function getLogoVariant(style = 0, setLayoutMode = null) {
+export function getLogoVariant(style = 0, setLayoutMode) {
   const baseClass = styles.navbarUtilsLogoBase;
 
-  const handleClick = () => {
-    if (setLayoutMode) setLayoutMode("inici");
-  };
+  // Define the logo structure
+  const logoJSX = (
+    <Typography as={Link} to="/home" className={baseClass}>
+      <span className={styles.navbarUtilsTextPrimary}>Feel</span>
+      <span className={styles.navbarUtilsTextSecondary}>It</span>
+    </Typography>
+  );
 
-  let logo;
-
-  switch (style) {
-    case 1:
-      logo = (
-        <Typography as={Link} to="/home" className={baseClass}>
-          <span className={styles.navbarUtilsTextSecondary}>Feel</span>
-          <span className={styles.navbarUtilsTextPrimary}>It</span>
-        </Typography>
-      );
-      break;
-    case 2:
-      logo = (
-        <Typography as={Link} to="/home" className={styles.navbarUtilsLogoLarge}>
-          Feel
-          <span
-            className={`${styles.navbarUtilsTextPrimary} ${styles.navbarUtilsTextItalic}`}
-          >
-            It
-          </span>
-        </Typography>
-      );
-      break;
-    default:
-      logo = (
-        <Typography as={Link} to="/home" className={baseClass}>
-          <span className={styles.navbarUtilsTextPrimary}>Feel</span>
-          <span className={styles.navbarUtilsTextSecondary}>It</span>
-        </Typography>
-      );
+  // If a layout mode setter is provided, wrap in clickable div
+  if (setLayoutMode) {
+    return <div onClick={() => setLayoutMode("inici")}>{logoJSX}</div>;
   }
 
-  // Si cal controlar el layoutMode, embolcalla el logo
-  return setLayoutMode ? <div onClick={handleClick}>{logo}</div> : logo;
+  return logoJSX;
 }
 
 

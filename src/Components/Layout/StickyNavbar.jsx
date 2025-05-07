@@ -1,18 +1,19 @@
-// StickyNavbar.jsx - Top navigation bar shown on all pages
-
 import React from "react";
 import { Navbar } from "@material-tailwind/react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Typography } from "@material-tailwind/react";
 import { useSearchContext } from "../../Context/SearchContext";
-import { useLayoutContext } from "../../Context/LayoutContext"; 
+import { useLayoutContext } from "../../Context/LayoutContext";
 
-import { getLogoVariant } from "./navbarUtils"; // getNavList no cal perquè l’hem reimplementat aquí
+import { getLogoVariant } from "./navbarUtils";
 import styles from "./Layout.module.css";
+
+// 🎞️ Animació
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function StickyNavbar() {
   const location = useLocation();
-  const { layoutMode, setLayoutMode } = useLayoutContext(); // Accés al context global
+  const { layoutMode, setLayoutMode } = useLayoutContext();
 
   const firstLabel = layoutMode === "search" ? "Search" : "Inici";
   const firstLink = layoutMode === "search" ? "/search" : "/home";
@@ -23,7 +24,7 @@ export default function StickyNavbar() {
     { label: "Contacte", to: "/contact" },
   ];
 
-  const logo = getLogoVariant(0, setLayoutMode); // En passar setLayoutMode, el logo actualitza l’estat
+  const logo = getLogoVariant(0, setLayoutMode);
 
   return (
     <Navbar fullWidth className={styles.stickyNavbarContainer}>
@@ -34,7 +35,7 @@ export default function StickyNavbar() {
 
         <div className={styles.stickyNavbarCenter}>
           <ul className={styles.navbarUtilsNavList}>
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <Typography
                 as="li"
                 key={item.to}
@@ -48,7 +49,22 @@ export default function StickyNavbar() {
                     }`
                   }
                 >
-                  {item.label}
+                  {/* Animació només al primer ítem */}
+                  {index === 0 ? (
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={item.label}
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 5 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        {item.label}
+                      </motion.span>
+                    </AnimatePresence>
+                  ) : (
+                    item.label
+                  )}
                 </NavLink>
               </Typography>
             ))}

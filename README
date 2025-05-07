@@ -52,7 +52,11 @@ FeelIt-frontend/
 │    │       └── SentimentChat.jsx 
 │    │
 │    ├── Context/
+│    │   ├── LayoutContext.jsx          # Context per gestionar l estat de cerca
 │    │   └── SearchContext.jsx       # Context per gestionar l estat de cerca
+|    │
+│    ├── hooks/
+│    │   └── useSearchLogic.jsx       # Context per gestionar l estat de cerca
 │    │
 │    ├── Pages/                      # Rutes i pàgines de la web
 │    │   ├── Home.jsx
