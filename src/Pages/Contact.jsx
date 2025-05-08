@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import styles from "./Contact.module.css";
+import styles from "./Module/Contact.module.css";
 
 export default function Contact() {
   return (

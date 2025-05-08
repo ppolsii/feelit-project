@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import styles from "./Search.module.css";
+import styles from "./Modules/Search.module.css";
 import SearchHeader from "../Components/Search/SearchHeader";
 import LoadingScreen from "../Components/Search/LoadingScreen";
 import Resultats from "../Components/Search/Resultats";
