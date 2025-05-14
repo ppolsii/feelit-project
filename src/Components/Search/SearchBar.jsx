@@ -23,7 +23,7 @@ export default function SearchBar({ searchTerm, setSearchTerm, handleSearch }) {
       <input
         type="text"                          
         className={styles.searchBarInput}    
-        placeholder="Cerca un tema..."      
+        placeholder="Search for a topic..."      
         value={searchTerm}                  // Value currently in the input (controlled component)
         onChange={(e) => setSearchTerm(e.target.value)}  // Each time the input changes, update the state with the new value
       />

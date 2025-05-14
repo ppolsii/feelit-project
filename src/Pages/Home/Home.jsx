@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import SearchBar from "../Components/Search/SearchBar";
-import fons from "../Assets/Fondo2.jpg";
-import styles from "./Modules/Home.module.css"; // CSS module for styling
-import { useLayoutContext } from "../Context/LayoutContext"; // For setting layout mode to 'inici'
+import SearchBar from "../../Components/Search/SearchBar";
+import fons from "../../Assets/Fondo2.jpg";
+import styles from "./Home.module.css"; // CSS module for styling
+import { useLayoutContext } from "../../Context/LayoutContext"; // For setting layout mode to 'inici'
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState(""); // User input from the search bar

@@ -21,7 +21,7 @@ export default function LoadingScreen({ progress }) {
         <FaReddit className={styles.iconPulse} />
       </div>
 
-      {/* Nova icona de càrrega */}
+      {/* Loading spinner */}
       <div className={styles.spinner}></div>
 
       <div className={styles.progressBar}>

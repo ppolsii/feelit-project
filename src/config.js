@@ -1,4 +1,4 @@
 // src/config.js
 export const config = {
-  useMockData: false, // o false en producción
+  useMockData: true, // o false en producción
 };

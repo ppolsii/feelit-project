@@ -4,11 +4,11 @@ import { Navigate } from "react-router-dom";
 
 //Pages
 import Layout  from "./Components/Layout/Layout";
-import Home from "./Pages/Home";
-import Search from "./Pages/Search";
-import Contact from "./Pages/Contact";
-import About from "./Pages/About"; 
-import NotFound from "./Pages/NotFound";
+import Home from "./Pages/Home/Home";
+import Search from "./Pages/Search/Search";
+import Contact from "./Pages/Contact/Contact";
+import About from "./Pages/About/About"; 
+import NotFound from "./Pages/NotFound/NotFound";
 
 export default function App() {
   return (

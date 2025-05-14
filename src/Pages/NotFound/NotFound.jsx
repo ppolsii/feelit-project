@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom"; // For navigation
-import SearchBar from "../Components/Search/SearchBar"; // Optional: reuse SearchBar
-import styles from "./Modules/Search.module.css"; // Reuse CSS already defined
+import SearchBar from "../../Components/Search/SearchBar"; // Optional: reuse SearchBar
+import styles from "../Search/Search.module.css"; // Reuse CSS already defined
 
 export default function NotFound() {
   return (

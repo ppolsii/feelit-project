@@ -1,0 +1,114 @@
+/* ======================================================
+   ABOUT PAGE STYLES
+   Used in: About.jsx
+   ====================================================== */
+
+/* Main wrapper for the page */
+.aboutPage {
+    width: 100%;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Container for the textual content */
+  .aboutContent {
+    max-width: 48rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* Main title of the page */
+  .aboutTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1f2937; /* gray-800 */
+  }
+  
+  /* Section wrapper: contains subtitle and paragraphs */
+  .aboutSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Subtitle for each section */
+  .aboutSubtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e40af; /* blue-800 */
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Paragraph style */
+  .aboutParagraph {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #374151; /* gray-700 */
+  }
+  
+  /* Inline code blocks inside paragraphs */
+  .aboutCode {
+    font-family: monospace;
+    background-color: #f3f4f6; /* gray-100 */
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.25rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Link appearance */
+  .aboutLink {
+    color: #2563eb;
+    text-decoration: underline;
+    word-break: break-word;
+  }
+
+  .stepCardsContainer {
+  margin-top: 1rem;
+}
+
+.stepCard {
+  background-color: #ffffff; /* fondo blanco para contraste */
+  border: 1px solid #e5e7eb; /* borde gris claro (Tailwind gray-200) */
+  border-radius: 0.5rem;     /* esquinas redondeadas */
+  padding: 1rem;             /* espacio interno uniforme */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* sombra sutil */
+  margin-bottom: 1.5rem;     /* espacio inferior entre tarjetas */
+}
+
+.stepTitle {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stepText {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.codeBlock {
+  background-color: #f9fafb; /* fondo gris muy claro para resaltar el código */
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.95rem;
+  white-space: pre;        /* preservar formato y espacios */
+  overflow-x: auto;        /* permitir scroll horizontal si es necesario */
+  margin-bottom: 0.75rem;
+}
+
+.warningBox {
+  background-color: rgba(255, 0, 0, 0.1); /* vermell viu, molt visible, translúcid */
+  border: 2px solid #dc2626; /* vermell fort (Tailwind red-600) */
+  color: #b91c1c; /* text vermell fosc (Tailwind red-700) */
+  padding: 1rem;
+  border-radius: 0.75rem; /* una mica més arrodonit */
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}

@@ -11,7 +11,7 @@ export default function SearchButton({ onClick }) {
       onClick={onClick} // Run the provided onClick function
       className={styles.searchButton} 
     >
-      Cercar
+      Search
     </button>
   );
 }

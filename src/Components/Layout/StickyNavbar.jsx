@@ -15,13 +15,13 @@ export default function StickyNavbar() {
   const location = useLocation();
   const { layoutMode, setLayoutMode } = useLayoutContext();
 
-  const firstLabel = layoutMode === "search" ? "Search" : "Inici";
+  const firstLabel = layoutMode === "search" ? "Search" : "Home";
   const firstLink = layoutMode === "search" ? "/search" : "/home";
 
   const navItems = [
     { label: firstLabel, to: firstLink },
     { label: "About", to: "/about" },
-    { label: "Contacte", to: "/contact" },
+    { label: "Contact", to: "/contact" },
   ];
 
   const logo = getLogoVariant(0, setLayoutMode);
