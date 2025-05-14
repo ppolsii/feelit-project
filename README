@@ -8,7 +8,7 @@
 
 - Search for desired topics
 - Extraction and visualization of relevant comments
-- Sentiment classification (positiu, negatiu, neutre)
+- Sentiment classification (positive, negative, neutral)
 - Loading bar with animation and icons
 - Informative pages (`About`, `Contact`, `NotFound`)
 - Responsive StickyNavbar navigation
@@ -92,24 +92,25 @@ FeelIt-frontend/
 
 ---
 
-## Used tecnologies
+## Used Technologies
 
 - **React 18**
-- **React Router DOM** (gestió de rutes)
-- **Material Tailwind** (components estilitzats)
+- **React Router DOM** (route management)
+- **Material Tailwind** (styled components)
 - **Tailwind CSS**
-- **React Helmet** (SEO per pàgines)
-- **React Icons** (icones de càrrega)
+- **React Helmet** (SEO optimization)
+- **React Icons** (loading and navigation icons)
 
 ---
 
-## Instalation and execution
+## Installation and Execution
 
------
+```bash
 npm install
 npm run dev
------
-**Frontend  will now be accessible at:**
+```
+
+**Frontend will now be accessible at:**
 `http://localhost:5173`
 
 ---
