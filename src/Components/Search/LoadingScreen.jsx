@@ -20,6 +20,10 @@ export default function LoadingScreen({ progress }) {
         <FaRobot className={styles.iconBounce} />
         <FaReddit className={styles.iconPulse} />
       </div>
+
+      {/* Nova icona de càrrega */}
+      <div className={styles.spinner}></div>
+
       <div className={styles.progressBar}>
         <div
           className={styles.progressFill}

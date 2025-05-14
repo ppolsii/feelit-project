@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Helmet } from "react-helmet"; // For setting the page title dynamically
-import styles from "./Module/About.module.css"; // Import scoped styles
+import styles from "./Modules/About.module.css"; // Import scoped styles
 
 export default function About() {
   return (

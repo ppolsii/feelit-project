@@ -1,13 +1,16 @@
-// src/hooks/useSearchLogic.js
-
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { generateSearchCSV } from "../utils/api";
+import { generateSearchCSV, fetchSearchResults } from "../utils/api";
 import { useSearchContext } from "../Context/SearchContext";
 
-/**
- * Encapsulates the full search logic: term management, loading, results, and error.
- */
+// Configurable wait settings
+const MAX_WAIT_MINUTES = 5;
+const DELAY_MS = 3000;
+const MAX_ATTEMPTS = Math.ceil((MAX_WAIT_MINUTES * 60 * 1000) / DELAY_MS);
+
+// Mock data flag
+const useMockData = false; // Posa true o false segons vulguis usar mock o backend
+
 export function useSearchLogic(setLayoutMode) {
   const [searchParams] = useSearchParams();
   const initialTerm = searchParams.get("term") || "";
@@ -27,29 +30,54 @@ export function useSearchLogic(setLayoutMode) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(false);
 
-  const useMockData = true;
-
   const handleSearch = () => {
     if (searchTerm.trim()) {
       navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
     }
   };
 
-  // When search page loads, set layout mode to 'search'
+  async function waitForResults(keyword) {
+    if (useMockData) {
+      try {
+        const res = await fetch("/data/mockResults.json");
+        if (!res.ok) throw new Error("Mock results not found");
+        const data = await res.json();
+        return data;
+      } catch (err) {
+        console.error("Error loading mock results:", err);
+        throw err;
+      }
+    } else {
+      const encodedKeyword = encodeURIComponent(keyword);
+      for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+        try {
+          const data = await fetchSearchResults(keyword);
+          return data;
+        } catch (err) {
+          console.error(`Waiting attempt ${attempt}:`, err);
+        }
+        await new Promise((resolve) => setTimeout(resolve, DELAY_MS));
+      }
+      throw new Error("Result not available after maximum waiting time");
+    }
+  }
+
   useEffect(() => {
     setLayoutMode("search");
   }, []);
 
-  // Restore last search if no new term provided
-  useEffect(() => {
-    if (!initialTerm && lastSearchTerm && searchResults) {
-      setResults(searchResults);
-    }
-  }, [initialTerm, lastSearchTerm, searchResults]);
-
-  // Trigger new search or reuse existing results
   useEffect(() => {
     if (!initialTerm.trim()) return;
+
+    // 🔥 Comprovem si tenim resultats guardats
+    const savedResults = localStorage.getItem("searchResults");
+    const savedTerm = localStorage.getItem("lastSearchTerm");
+
+    if (savedResults && savedTerm === initialTerm) {
+      setResults(JSON.parse(savedResults));
+      setIsLoading(false);
+      return;
+    }
 
     if (searchResults && initialTerm === lastSearchTerm) {
       setResults(searchResults);
@@ -62,55 +90,38 @@ export function useSearchLogic(setLayoutMode) {
     setProgress(0);
     setResults(null);
 
-    generateSearchCSV(initialTerm)
-      .then((data) => console.log("Backend responded:", data.message))
-      .catch((err) => console.error("Backend error:", err));
-
     const simulateProgress = setInterval(() => {
       setProgress((prev) => Math.min(prev + 2, 90));
     }, 30);
 
-    const timeout = setTimeout(() => {
-      const url = useMockData
-        ? "/data/mockResults.json"
-        : `/api/search?query=${encodeURIComponent(initialTerm)}`;
+    const loadResults = async () => {
+      try {
+        if (!useMockData) {
+          await generateSearchCSV(initialTerm);
+        }
+        const data = await waitForResults(initialTerm);
+        if (!data) throw new Error("Empty result");
 
-      fetch(url)
-        .then((res) => {
-          if (!res.ok) throw new Error("Result not found");
-          return res.json();
-        })
-        .then((data) => {
-          const hasContent =
-            data &&
-            (
-              (data.sentiments && Object.values(data.sentiments).some(n => n > 0)) ||
-              (data.opinions?.positives?.length > 0 || data.opinions?.negatives?.length > 0) ||
-              (data.comentaris?.length > 0)
-            );
+        setResults(data);
+        setSearchResults(data);
+        setLastSearchTerm(initialTerm);
 
-          if (!hasContent) throw new Error("Empty result");
+        // 🔥 Guardem també a LocalStorage
+        localStorage.setItem("searchResults", JSON.stringify(data));
+        localStorage.setItem("lastSearchTerm", initialTerm);
 
-          setResults(data);
-          setSearchResults(data);
-          setLastSearchTerm(initialTerm);
-          setProgress(100);
-          setHasSearched(true);
-        })
-        .catch((err) => {
-          console.error("Error loading data:", err);
-          setError(true);
-        })
-        .finally(() => {
-          clearInterval(simulateProgress);
-          setIsLoading(false);
-        });
-    }, 1500);
-
-    return () => {
-      clearInterval(simulateProgress);
-      clearTimeout(timeout);
+        setProgress(100);
+        setHasSearched(true);
+      } catch (err) {
+        console.error("Error loading data:", err);
+        setError(true);
+      } finally {
+        clearInterval(simulateProgress);
+        setIsLoading(false);
+      }
     };
+
+    loadResults();
   }, [initialTerm]);
 
   return {
