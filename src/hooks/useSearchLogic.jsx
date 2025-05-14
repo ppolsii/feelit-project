@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { generateSearchCSV, fetchSearchResults } from "../utils/api";
 import { useSearchContext } from "../Context/SearchContext";
+import { config } from "../config";
 
 // Configurable wait settings
 const MAX_WAIT_MINUTES = 5;
@@ -9,7 +10,7 @@ const DELAY_MS = 3000;
 const MAX_ATTEMPTS = Math.ceil((MAX_WAIT_MINUTES * 60 * 1000) / DELAY_MS);
 
 // Mock data flag
-const useMockData = false; // Posa true o false segons vulguis usar mock o backend
+const { useMockData } = config; // Set to false to use real data - change in config.js
 
 export function useSearchLogic(setLayoutMode) {
   const [searchParams] = useSearchParams();
