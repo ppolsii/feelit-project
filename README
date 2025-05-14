@@ -1,22 +1,22 @@
-# 🧠 FeelIt - Opinion Analysis on Reddit
+# FeelIt - Opinion Analysis on Reddit
 
 **FeelIt** is a web application developed as a Final Degree Project to analyze opinions on any topic collected from Reddit, presenting a summarized and clear view through sentiment analysis and highlighted comments.
 
 ---
 
-## 🔍 Features
+## Features
 
-- ✅ Search for desired topics
-- ✅ Extraction and visualization of relevant comments
-- ✅ Sentiment classification (positiu, negatiu, neutre)
-- ✅ Loading bar with animation and icons
-- ✅ Informative pages (`About`, `Contact`, `NotFound`)
-- ✅ Responsive StickyNavbar navigation
-- ✅ Scroll locked only on the home page
+- Search for desired topics
+- Extraction and visualization of relevant comments
+- Sentiment classification (positiu, negatiu, neutre)
+- Loading bar with animation and icons
+- Informative pages (`About`, `Contact`, `NotFound`)
+- Responsive StickyNavbar navigation
+- Scroll locked only on the home page
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 
 ```
 FeelIt-frontend/
@@ -25,7 +25,7 @@ FeelIt-frontend/
 │        └── mockResults.json        # Real JSON file for fetch
 │
 ├──src/
-│    ├── Assets/                      # Images and visual resources
+│    ├── Assets/                     # Images and visual resources
 │    │   ├── Fondos.jpg
 │    │   └── Logos.jpg
 │    │
@@ -52,40 +52,47 @@ FeelIt-frontend/
 │    │       └── SentimentChat.jsx 
 │    │
 │    ├── Context/
-│    │   ├── LayoutContext.jsx          # Context per gestionar l estat de cerca
+│    │   ├── LayoutContext.jsx       # Context per gestionar l estat de cerca
 │    │   └── SearchContext.jsx       # Context per gestionar l estat de cerca
 |    │
 │    ├── hooks/
-│    │   └── useSearchLogic.jsx       # Context per gestionar l estat de cerca
+│    │   └── useSearchLogic.jsx      # Context per gestionar l estat de cerca
 │    │
 │    ├── Pages/                      # Rutes i pàgines de la web
-│    │   ├── Home.jsx
-│    │   ├── Home.module.css
-│    │   ├── Search.jsx
-│    │   ├── Search.module.css
-│    │   ├── About.jsx
-│    │   ├── About.module.css
-│    │   ├── Contact.jsx
-│    │   ├── Contact.module.css
-│    │   └── NotFound.jsx
+│    │   ├── Home
+│    │   |   ├── Home.jsx
+│    │   |   └── Home.module.css
+│    │   ├── Search
+│    │   |   ├── Search.jsx
+│    │   |   └── Search.module.css
+│    │   ├── About
+│    │   |   ├── About.jsx
+│    │   |   ├── About.module.css
+│    │   |   └── AboutSection.jsx
+│    │   ├── Contact
+│    │   |   ├── Contact.jsx 
+│    │   |   └── Contact.module.css
+│    │   └── NotFound
+│    │       └── NotFound.jsx
 │    │   
 │    ├── utils/  
 │    │   └── api.jsx                 # Funcions per fer fetch a l API
 │    │
 │    ├── App.jsx                     # Rutes de React Router
+│    ├── config.js                   # Configuració mock 
 │    ├── main.jsx                    # Entry point de React
 │    ├── index.css                   # Estils globals + gestió d’scroll condicional
 │    └── index.html
 │
 ├── package.json
-├── tailwind.config.js              # Configuració de Tailwind
-├── postcss.config.js               # Configuració de PostCSS
+├── tailwind.config.js               # Configuració de Tailwind
+├── postcss.config.js                # Configuració de PostCSS
 └── README.md
 ```
 
 ---
 
-## 🧠 Used tecnologies
+## Used tecnologies
 
 - **React 18**
 - **React Router DOM** (gestió de rutes)
@@ -96,18 +103,18 @@ FeelIt-frontend/
 
 ---
 
-## 📦 Instalation and execution
+## Instalation and execution
 
-```bash
+-----
 npm install
 npm run dev
-```
-**Frintend  will now be accessible at:**
+-----
+**Frontend  will now be accessible at:**
 `http://localhost:5173`
 
 ---
 
-## ✨ Developed by
+## Developed by
 
 **Pol González Casals**  
 Universitat Autònoma de Barcelona (2025)  
