@@ -9,10 +9,9 @@ import { SearchProvider } from './Context/SearchContext';
 import { LayoutProvider } from './Context/LayoutContext'; // Layout mode context
 import App from './App';
 
-// Wrap the entire app with required providers (theme, layout, search, routing)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider>
-    <LayoutProvider> {/* Provides layoutMode: 'inici' or 'search' */}
+    <LayoutProvider> {/* Provides layoutMode: 'home' or 'search' */}
       <SearchProvider>
         <BrowserRouter>
           <App />

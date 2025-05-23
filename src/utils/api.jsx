@@ -1,9 +1,9 @@
 // src/utils/api.js
 
-const BACKEND_URL = "http://localhost:8000"; // Canvia-ho en producció
+const BACKEND_URL = "http://localhost:8000"; // May get changed in production
 
 /**
- * Envia la keyword al backend per iniciar la generació de resultats (CSV, etc.)
+ * Sends the keyword to the backend to start generating results (CSV, etc.)
  */
 export const generateSearchCSV = async (keyword) => {
   const res = await fetch(`${BACKEND_URL}/api/search?keyword=${encodeURIComponent(keyword)}`);
@@ -12,10 +12,10 @@ export const generateSearchCSV = async (keyword) => {
 };
 
 /**
- * Obté resultats analitzats del backend (opinions, sentiments, etc.)
+ * Gets analyzed results from the backend (opinions, sentiments, etc.)
  */
 export const fetchSearchResults = async (keyword) => {
   const res = await fetch(`${BACKEND_URL}/search/${encodeURIComponent(keyword)}`);
   if (!res.ok) throw new Error("Error obtenint resultats");
-  return await res.json(); // JSON amb opinions, sentiments, comentaris...
+  return await res.json(); // JSON with results
 };
