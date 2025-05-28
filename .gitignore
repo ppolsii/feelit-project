@@ -33,3 +33,6 @@ dist/
 
 #guia de uso
 Guia.txt
+
+# Mock data - Japan
+public/data/reddit_praw_Trip_to_Japan_2025-05-23_analyzed.json

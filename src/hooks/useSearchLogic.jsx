@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { generateSearchCSV, fetchSearchResults } from "../utils/api";
 import { useSearchContext } from "../Context/SearchContext";
 import { config } from "../config";
@@ -14,8 +14,11 @@ const { useMockData } = config; // Set to false to use real data - change in con
 
 export function useSearchLogic(setLayoutMode) {
   const [searchParams] = useSearchParams(); // Get search params from URL (e.g., ?term=searchTerm)
-  const initialTerm = searchParams.get("term") || ""; // Initial search term 
+  const initialTerm = searchParams.get("term") || localStorage.getItem("lastSearchTerm") || "";
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   // Context for search state management
   const {
@@ -24,7 +27,7 @@ export function useSearchLogic(setLayoutMode) {
     setSearchResults,
     lastSearchTerm,
     setLastSearchTerm,
-  } = useSearchContext();
+  } = useSearchContext(); //useSearchContext
 
   // Local state for search logic
   const [searchTerm, setSearchTerm] = useState(initialTerm); //Input value
@@ -45,7 +48,8 @@ export function useSearchLogic(setLayoutMode) {
     if (useMockData) {
       // Load mock data from local file
       try {
-        const res = await fetch("/data/mockResults.json");
+        // const res = await fetch("/data/mockResults.json");
+        const res = await fetch("/data/reddit_praw_Trip_to_Japan_2025-05-23_analyzed.json");
         if (!res.ok) throw new Error("Mock results not found");
         const data = await res.json();
         return data;
@@ -76,66 +80,67 @@ export function useSearchLogic(setLayoutMode) {
 
   // If we had an initial term, we set the search term to the initial term
   useEffect(() => {
-    if (!initialTerm.trim()) return;
+  // ✅ NOVA LÒGICA: Si tornes a /search sense terme, mostra els últims resultats
+  if (!initialTerm.trim() && searchResults) {
+    setResults(searchResults);
+    setIsLoading(false);
+    return;
+  }
 
-    // Load results if we had them saved in localStorage
-    const savedResults = localStorage.getItem("searchResults");
-    const savedTerm = localStorage.getItem("lastSearchTerm");
+  if (!initialTerm.trim()) return;
 
-    // If we have results saved and the term is the same as the initial term, load them
-    if (savedResults && savedTerm === initialTerm) {
-      setResults(JSON.parse(savedResults));
-      setIsLoading(false);
-      return;
-    }
+  const savedResults = localStorage.getItem("searchResults");
+  const savedTerm = localStorage.getItem("lastSearchTerm");
 
-    // If we already hace the results in the context, we reuse them
-    if (searchResults && initialTerm === lastSearchTerm) {
-      setResults(searchResults);
-      setIsLoading(false);
-      return;
-    }
+  if (savedResults && savedTerm === initialTerm) {
+    setResults(JSON.parse(savedResults));
+    setIsLoading(false);
+    return;
+  }
 
-    // Reset the state before doing a new search
-    setIsLoading(true);
-    setError(false);
-    setProgress(0);
-    setResults(null);
+  if (searchResults && initialTerm === lastSearchTerm) {
+    setResults(searchResults);
+    setIsLoading(false);
+    return;
+  }
 
-    // Simulate progress bar
-    const simulateProgress = setInterval(() => {
-      setProgress((prev) => Math.min(prev + 2, 90));
-    }, 30);
+  // 🔁 Tot el que ja tenies: carregar nous resultats
+  setIsLoading(true);
+  setError(false);
+  setProgress(0);
+  setResults(null);
 
-    // Execution of the search and load results
-    const loadResults = async () => {
-      try {
-        if (!useMockData) {
-          await generateSearchCSV(initialTerm); // Send search to the server
-        }
-        const data = await waitForResults(initialTerm); // Wait for results
+  const simulateProgress = setInterval(() => {
+    setProgress((prev) => Math.min(prev + 2, 90));
+  }, 30);
 
-        setResults(data);
-        setSearchResults(data);
-        setLastSearchTerm(initialTerm);
-
-        // Results saved in localStorage
-        localStorage.setItem("searchResults", JSON.stringify(data));
-        localStorage.setItem("lastSearchTerm", initialTerm);
-
-        setProgress(100);
-        setHasSearched(true);
-      } catch (err) {
-        console.error("Error loading data:", err);
-        setError(true);
-      } finally {
-        clearInterval(simulateProgress);
-        setIsLoading(false);
+  const loadResults = async () => {
+    try {
+      if (!useMockData) {
+        await generateSearchCSV(initialTerm);
       }
-    };
+      const data = await waitForResults(initialTerm);
 
-    loadResults();
-  }, [initialTerm]);
+      setResults(data);
+      setSearchResults(data);
+      setLastSearchTerm(initialTerm);
+
+      localStorage.setItem("searchResults", JSON.stringify(data));
+      localStorage.setItem("lastSearchTerm", initialTerm);
+
+      setProgress(100);
+      setHasSearched(true);
+    } catch (err) {
+      console.error("Error loading data:", err);
+      setError(true);
+    } finally {
+      clearInterval(simulateProgress);
+      setIsLoading(false);
+    }
+  };
+
+  loadResults();
+}, [initialTerm]);
 
   return {
     searchTerm,
