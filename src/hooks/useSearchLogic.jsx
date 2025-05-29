@@ -48,8 +48,8 @@ export function useSearchLogic(setLayoutMode) {
     if (useMockData) {
       // Load mock data from local file
       try {
-        // const res = await fetch("/data/mockResults.json");
-        const res = await fetch("/data/reddit_praw_Trip_to_Japan_2025-05-23_analyzed.json");
+        const res = await fetch("/data/mockResults.json");
+        // const res = await fetch("/data/reddit_praw_Trip_to_Japan_2025-05-23_analyzed.json");
         if (!res.ok) throw new Error("Mock results not found");
         const data = await res.json();
         return data;
@@ -80,7 +80,7 @@ export function useSearchLogic(setLayoutMode) {
 
   // If we had an initial term, we set the search term to the initial term
   useEffect(() => {
-  // ✅ NOVA LÒGICA: Si tornes a /search sense terme, mostra els últims resultats
+  // If user returns to /search without a term, show the last results
   if (!initialTerm.trim() && searchResults) {
     setResults(searchResults);
     setIsLoading(false);
@@ -104,7 +104,7 @@ export function useSearchLogic(setLayoutMode) {
     return;
   }
 
-  // 🔁 Tot el que ja tenies: carregar nous resultats
+  // Load new results again, because yes
   setIsLoading(true);
   setError(false);
   setProgress(0);
